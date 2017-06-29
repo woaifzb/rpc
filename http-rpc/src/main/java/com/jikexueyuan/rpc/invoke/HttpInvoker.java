@@ -4,6 +4,7 @@ import com.jikexueyuan.rpc.exception.RpcException;
 import com.jikexueyuan.rpc.exception.RpcExceptionCodeEnum;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.routing.HttpRoute;
@@ -34,8 +35,8 @@ public class HttpInvoker implements Invoker
 
     public static final Invoker invoker = new HttpInvoker();
 
-    public String request(String request, ConsumerConfig consumerConfig) throws RpcException {
-        HttpPost post = new HttpPost(consumerConfig.getUrl());
+    public String request(String request, String url) throws RpcException {
+        HttpPost post = new HttpPost(url);
         post.setHeader("Connection", "Keep-Alive");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("data", request));
@@ -51,7 +52,7 @@ public class HttpInvoker implements Invoker
         }
         catch (Exception e)
         {
-            throw new RpcException("http µ÷ÓÃÒì³£",e, RpcExceptionCodeEnum.INVOKE_REQUEST_ERROR.getCode(),request);
+            throw new RpcException("http è°ƒç”¨å¼‚å¸¸",e, RpcExceptionCodeEnum.INVOKE_REQUEST_ERROR.getCode(),request);
         }
 
     }
@@ -67,17 +68,19 @@ public class HttpInvoker implements Invoker
     }
 
     public static HttpClient getHttpClient() {
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-        //Á¬½Ó³Ø×î´óÉú³ÉÁ¬½ÓÊı200
+    	PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+        //è¿æ¥æ± æœ€å¤§ç”Ÿæˆè¿æ¥æ•°200
         cm.setMaxTotal(200);
-        // Ä¬ÈÏÉèÖÃroute×î´óÁ¬½ÓÊıÎª20
+        // é»˜è®¤è®¾ç½®routeæœ€å¤§è¿æ¥æ•°ä¸º20
         cm.setDefaultMaxPerRoute(20);
-        // Ö¸¶¨×¨ÃÅµÄroute£¬ÉèÖÃ×î´óÁ¬½ÓÊıÎª80
+        // æŒ‡å®šä¸“é—¨çš„routeï¼Œè®¾ç½®æœ€å¤§è¿æ¥æ•°ä¸º80
         HttpHost localhost = new HttpHost("localhost", 8080);
         cm.setMaxPerRoute(new HttpRoute(localhost), 50);
-        // ´´½¨httpClient
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(60000).setConnectTimeout(500).build();//è®¾ç½®è¯·æ±‚å’Œä¼ è¾“è¶…æ—¶æ—¶é—´
+        // åˆ›å»ºhttpClient
          return HttpClients.custom()
                 .setConnectionManager(cm)
+                 .setDefaultRequestConfig(requestConfig)
                  .build();
 
     }

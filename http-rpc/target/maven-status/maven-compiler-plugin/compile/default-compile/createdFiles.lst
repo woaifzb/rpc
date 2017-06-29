@@ -1,5 +1,6 @@
 com\jikexueyuan\rpc\invoke\Invoker.class
 com\jikexueyuan\rpc\container\Container.class
+com\jikexueyuan\rpc\zookeeper\ZookeeperClient.class
 com\jikexueyuan\rpc\invoke\ProviderConfig.class
 com\jikexueyuan\rpc\invoke\HttpInvoker.class
 com\jikexueyuan\rpc\exception\RpcException.class

@@ -49,7 +49,7 @@ public class ProviderProxyFactory extends AbstractHandler
         }
         for (Map.Entry<Class,Object> entry: providers.entrySet())
         {
-            register(entry.getKey(), entry.getValue());
+            register(entry.getKey(), entry.getValue(),null);
         }
         factory = this;
     }
@@ -62,14 +62,17 @@ public class ProviderProxyFactory extends AbstractHandler
         }
         for (Map.Entry<Class,Object> entry: providers.entrySet())
         {
-            register(entry.getKey(), entry.getValue());
+            register(entry.getKey(), entry.getValue(),providerConfig);
         }
         factory = this;
     }
 
-    public void register(Class clazz,Object object)
+    public void register(Class clazz,Object object,ProviderConfig config)
     {
-        providers.put(clazz,object);
+        providers.put(clazz, object);
+        if (config != null){
+            config.register(clazz);
+        }
         logger.info("{} 已经发布", clazz.getSimpleName());
     }
 
@@ -79,11 +82,11 @@ public class ProviderProxyFactory extends AbstractHandler
         String reqStr = request.getParameter("data");
         try
         {
-        	//将请求参数解析
+            //将请求参数解析
             Request rpcRequest = parser.reqParse(reqStr);
             //反射请求
             Object result = rpcRequest.invoke(ProviderProxyFactory.getInstance().getBeanByClass(rpcRequest.getClazz()));
-          //相应请求
+            //相应请求
             invoker.response(formater.rsbFormat(result),response.getOutputStream());
         }
         catch (RpcException e)
