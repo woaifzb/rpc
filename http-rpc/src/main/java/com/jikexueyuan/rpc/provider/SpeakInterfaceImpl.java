@@ -1,8 +1,9 @@
-package com.jikexueyuan.rpc.com.jikexueyuan.rpc;
+package com.jikexueyuan.rpc.provider;
+
+import org.springframework.stereotype.Component;
 
 import com.jikexueyuan.rpc.People;
 import com.jikexueyuan.rpc.SpeakInterface;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by version_z on 2015/8/22.
@@ -24,7 +25,7 @@ public class SpeakInterfaceImpl implements SpeakInterface
         }
         else
         {
-            return "未成年小朋友";
+            return "小朋友";
         }
     }
 

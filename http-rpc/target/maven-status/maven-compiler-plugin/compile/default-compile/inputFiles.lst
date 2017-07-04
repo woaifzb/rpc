@@ -6,6 +6,7 @@ E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\serializ
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\invoke\ProviderConfig.java
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\container\Container.java
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\proxy\ConsumerProxyFactory.java
+E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\provider\SpeakInterfaceImpl.java
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\container\Main.java
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\serialize\json\JsonFormater.java
 E:\eclipseWorkspace\mine\rpc\http-rpc\src\main\java\com\jikexueyuan\rpc\zookeeper\ZookeeperClient.java

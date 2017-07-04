@@ -43,7 +43,7 @@ public class HttpRpcTest
             Runnable run=new Runnable(){
                 public void run()
                 {
-                    logger.info(peopleController.getSpeak(new Random(100).nextInt(),new Random(1).nextInt()));
+                    logger.info(peopleController.getSpeak(new Random().nextInt(18),new Random().nextInt(1)));
                     countDownLatch.countDown();
                 }
             };
@@ -53,4 +53,11 @@ public class HttpRpcTest
         System.out.println(new Date().getTime() - date.getTime());
         exec.shutdown();
     }
+    
+    
+    
+    public static void main(String[] args) {
+    	for(int i=0;i<10;i++)
+		System.out.println("age :"+ new Random().nextInt(100)+"set:"+new Random().nextInt(1));
+	}
 }

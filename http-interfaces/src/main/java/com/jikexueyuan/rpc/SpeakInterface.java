@@ -6,4 +6,5 @@ package com.jikexueyuan.rpc;
 public interface SpeakInterface
 {
     String speak(People people);
+    String speak (String hear);
 }
